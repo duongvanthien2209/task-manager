@@ -6,11 +6,13 @@ import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 
 @Controller('tasks')
+@UseGuards(AuthGuard())
 export class TasksController {
   constructor(private taskSevice: TasksService) {}
 
   @Get('/:id')
   getTaskByID(@Param('id') id?: string) {
+    console.log(id);
     return this.taskSevice.getTaskByID(id);
   }
 

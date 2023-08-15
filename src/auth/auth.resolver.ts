@@ -11,4 +11,9 @@ export class AuthResolver {
   createUser(@Args('createUserDto') createUserDto: CreateUserDto) {
     return this.authService.createUser(createUserDto);
   }
+
+  @Mutation((returns) => UserType)
+  signIn(@Args('createUserDto') createUserDto: CreateUserDto) {
+    return this.authService.signIn(createUserDto);
+  }
 }

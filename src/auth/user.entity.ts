@@ -1,9 +1,11 @@
 import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
+import { Task } from '../tasks/task.entity';
+import { ObjectId } from 'mongodb';
 
 @Entity()
 export class User {
   @ObjectIdColumn()
-  _id: string;
+  _id: ObjectId;
 
   @PrimaryColumn()
   id: string;

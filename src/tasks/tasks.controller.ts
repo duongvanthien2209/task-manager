@@ -4,6 +4,8 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -12,12 +14,12 @@ export class TasksController {
 
   @Get('/:id')
   getTaskByID(@Param('id') id?: string) {
-    console.log(id);
     return this.taskSevice.getTaskByID(id);
   }
 
   @Post('')
-  createTask(@Body() createTaskDto: CreateTaskDto) {
+  createTask(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User) {
+    console.log(user);
     return this.taskSevice.createTask(createTaskDto);
   }
 

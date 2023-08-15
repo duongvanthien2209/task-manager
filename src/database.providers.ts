@@ -12,7 +12,7 @@ export const databaseProviders = [
         url: 'mongodb+srv://duongvanthienbkhoa:thien3324@cluster0.dwvhdlu.mongodb.net/?retryWrites=true&w=majority',
         synchronize: true,
         useUnifiedTopology: true,
-        entities: [Task, Lesson, User],
+        entities: [Task, User],
       });
 
       return dataSource.initialize();

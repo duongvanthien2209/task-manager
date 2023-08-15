@@ -1,12 +1,13 @@
-import { Column, Entity, ObjectIdColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 import { ObjectId } from 'mongodb';
+import { User } from '../auth/user.entity';
 
 @Entity()
 export class Task {
   @ObjectIdColumn()
   _id: ObjectId;
 
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -17,4 +18,7 @@ export class Task {
 
   @Column()
   status: string;
+
+  @Column((type) => User)
+  user: User;
 }

@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ObjectId } from 'mongodb';
+import { v4 as uuid } from 'uuid';
 import { Task } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Repository } from 'typeorm';
@@ -10,7 +10,7 @@ export class TasksService {
   constructor(@Inject('TASKS_REPOSITORY') private tasksRepository: Repository<Task>) {}
 
   async getTaskByID(id: string): Promise<Task> {
-    const task = await this.tasksRepository.findOne({ where: { _id: new ObjectId(id) } });
+    const task = await this.tasksRepository.findOne({ where: { id } });
 
     if (!task) throw new NotFoundException(`The task with ID ${id} is not found`);
 
@@ -21,6 +21,7 @@ export class TasksService {
     const { title, description } = createTaskDto;
 
     const task = this.tasksRepository.create({
+      id: uuid(),
       title,
       description,
       status: TaskStatus.OPEN,
